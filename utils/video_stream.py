@@ -38,7 +38,7 @@ def get_tf_response(config, roi, model_mode):
 			max_idx = np.argmax(predictions)
 			max_percentage = round(predictions[max_idx] * 100, 2)
 		else:
-			print(emotion_response)
+			print(response)
 		return max_idx, max_percentage
 
 	except:
@@ -56,17 +56,12 @@ def wrap_data(roi):
 	return push_data_json
 
 
-def video_access(config, video_dir):
+def video_stream(config):
 	num_frames = 0
 	max_emotion_idx, max_mood_idx = 5, 1
 	max_emotion_percentage, max_mood_percentage = 100, 100
-	result = 'Emotion: {} ({}%) - Mood: {} ({}%)'
 
-	cap = cv2.VideoCapture(video_dir)
-
-	frame_width = int(cap.get(3))
-	frame_height = int(cap.get(4))
-	size = (frame_width, frame_height)
+	cap = cv2.VideoCapture(0)
 
 	threads = []
 
@@ -76,7 +71,7 @@ def video_access(config, video_dir):
 		ret, frame = cap.read()
 
 		while ret:
-			found_face, roi = deep_convert(config, frame)
+			found_face, roi = deep_convert(config, frame, (max_emotion_idx, max_mood_idx), (max_emotion_percentage, max_mood_percentage))
 
 			if found_face:
 				if num_frames % config['FRAMES_PER_REQUEST'] == 0:
@@ -96,10 +91,6 @@ def video_access(config, video_dir):
 					threads.append(t)
 					t.start()
 
-				cv2.putText(
-					frame,
-					result.format(config['EMOTIONS'][max_emotion_idx], max_emotion_percentage, config['MOODS'][max_mood_idx], max_mood_percentage),
-					(20, 20), config['FONT_STYLE'], config['FONT_SCALE'], config['COLOR'], config['TEXT_THICKNESS'])
 				num_frames += 1
 
 			# show the frame
