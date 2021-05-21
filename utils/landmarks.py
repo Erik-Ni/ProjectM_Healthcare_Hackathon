@@ -1,4 +1,4 @@
-def firstmodify(left, right, up, bottom, margin_perc = 20):
+def firstmodify(left, right, up, bottom, margin_perc=20):
 	if (right - left) >= (bottom - up):
 		margin = int((right - left) * margin_perc / 100)
 		diff = (right - left) - (bottom - up)
@@ -29,6 +29,7 @@ def firstmodify(left, right, up, bottom, margin_perc = 20):
 
 	return left, right, up, bottom
 
+
 def ifoverborder(left, right, up, bottom, width, height):
 	if left < 0:
 		right = right + (0 - left)
@@ -53,9 +54,9 @@ def ifoverborder(left, right, up, bottom, width, height):
 
 	return left, right, up, bottom
 
+
 def finalmodify(left, right, up, bottom):
-	#print(left, right, up, bottom)
-	if right  -  left < bottom - up:
+	if right - left < bottom - up:
 		diff = (bottom - up) - (right - left)
 		if diff % 2 == 0:
 			up = int(up + diff / 2)

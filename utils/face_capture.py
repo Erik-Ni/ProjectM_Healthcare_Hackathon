@@ -3,6 +3,7 @@ import pandas as pd
 import numpy as np
 from .landmarks import firstmodify, ifoverborder, finalmodify
 
+
 def deep_convert(config, frame):
 	net = cv2.dnn.readNetFromCaffe(config['PROTOTXT_DIRECTORY'], config['CAFFEMODEL_DIRECTORY'])
 	left, up, right, bottom = -1, -1, -1, -1
@@ -29,19 +30,19 @@ def deep_convert(config, frame):
 				left, right, up, bottom = firstmodify(startX, endX, startY, endY)
 				left, right, up, bottom = ifoverborder(left, right, up, bottom, w, h)
 				left, right, up, bottom = finalmodify(left, right, up, bottom)
-				
+
 				width = (right - left)
 				height = (bottom - up)
 				f = 0.3
 
-				left += int ( width * f / 2 )
-				right -= int ( width * f / 2 )
-				up += int (height * f / 2)
-				bottom -= int (height * f / 2)
+				left += int(width * f / 2)
+				right -= int(width * f / 2)
+				up += int(height * f / 2)
+				bottom -= int(height * f / 2)
 
 				roi = frame[up:bottom, left:right]
 
-				cv2.rectangle(frame, (left, up), (right, bottom), config['COLOR'], thickness = config['RECTANGLE_THICKNESS'])
+				cv2.rectangle(frame, (left, up), (right, bottom), config['COLOR'], thickness=config['RECTANGLE_THICKNESS'])
 
 				return True, roi
 

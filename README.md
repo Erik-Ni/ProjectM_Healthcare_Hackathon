@@ -15,7 +15,7 @@ IPMD - Texas Children Hospital Hakathon Repository
 [MacOS](https://docs.python-guide.org/starting/install3/osx/)
 
 ### Configuration
-- Add configuration file ```config.ini```  into the folder
+- Download the configuration file [config.ini](https://www.notion.so/ProjectM_Healthcare_Hackathon-fb305d38f7594c178593d6a60c104020) and add it to the main folder
 - Modify configuration (if necessary)
 
 ### Set up virtual environment:
@@ -41,5 +41,5 @@ source venv/bin/activate
 ```
 
 ## Demo
-
+- This is the demo
 ![](demo.gif)

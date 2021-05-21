@@ -10,21 +10,22 @@ parser.read('config.ini')
 
 config = dict()
 
-config['HOST'] = parser.get('DOMAIN', 'HOST')
-config['PORT'] = parser.get('DOMAIN', 'PORT')
-config['EMOTION_URL'] = parser.get('APIS', 'EMOTION_URL').format(config['HOST'], config['PORT'])
-config['MOOD_URL'] = parser.get('APIS', 'MOOD_URL').format(config['HOST'], config['PORT'])
-config['PROTOTXT_DIRECTORY'] = parser.get('APIS', 'PROTOTXT_DIRECTORY')
-config['CAFFEMODEL_DIRECTORY'] = parser.get('APIS', 'CAFFEMODEL_DIRECTORY')
+config['EMOTION_API'] = parser.get('NETWORK', 'EMOTION_API')
+config['MOOD_API'] = parser.get('NETWORK', 'MOOD_API')
+config['REQUEST_TIMEOUT'] = int(parser.get('NETWORK', 'REQUEST_TIMEOUT'))
+config['FRAMES_PER_REQUEST'] = int(parser.get('NETWORK', 'FRAMES_PER_REQUEST'))
 
-config['EMOTIONS'] = json.loads(parser.get('DATA_LIST', 'EMOTIONS'))
-config['MOODS'] = json.loads(parser.get('DATA_LIST', 'MOODS'))
+config['PROTOTXT_DIRECTORY'] = parser.get('DIRECTORIES', 'PROTOTXT_DIRECTORY')
+config['CAFFEMODEL_DIRECTORY'] = parser.get('DIRECTORIES', 'CAFFEMODEL_DIRECTORY')
 
-config['FRAMES_PER_REQUEST'] = int(parser.get('CONFIGURATION', 'FRAMES_PER_REQUEST'))
-config['FONT_SCALE'] = float(parser.get('CONFIGURATION', 'FONT_SCALE'))
-config['COLOR'] = (int(parser.get('CONFIGURATION', 'BLUE_LEVEL')), int(parser.get('CONFIGURATION', 'GREEN_LEVEL')), int(parser.get('CONFIGURATION', 'RED_LEVEL')))
-config['RECTANGLE_THICKNESS'] = int(parser.get('CONFIGURATION', 'RECTANGLE_THICKNESS'))
-config['TEXT_THICKNESS'] = int(parser.get('CONFIGURATION', 'TEXT_THICKNESS'))
+config['EMOTIONS'] = json.loads(parser.get('DATA', 'EMOTIONS'))
+config['MOODS'] = json.loads(parser.get('DATA', 'MOODS'))
+
+config['FONT_STYLE'] = int(parser.get('OPENCV', 'FONT_STYLE'))
+config['FONT_SCALE'] = float(parser.get('OPENCV', 'FONT_SCALE'))
+config['COLOR'] = (int(parser.get('OPENCV', 'BLUE')), int(parser.get('OPENCV', 'GREEN')), int(parser.get('OPENCV', 'RED')))
+config['RECTANGLE_THICKNESS'] = int(parser.get('OPENCV', 'RECTANGLE_THICKNESS'))
+config['TEXT_THICKNESS'] = int(parser.get('OPENCV', 'TEXT_THICKNESS'))
 
 ############################################################################################################################################
 
