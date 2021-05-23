@@ -26,7 +26,7 @@ def get_tf_response(config, roi, model_mode):
 
 	push_data_json = wrap_data(roi)
 
-	if model_mode == 1:
+	if model_mode == 0:
 		max_idx, max_percentage = 5, 100
 		api = config['MOOD_API']
 
